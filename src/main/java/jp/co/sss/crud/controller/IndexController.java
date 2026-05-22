@@ -1,5 +1,6 @@
 package jp.co.sss.crud.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,5 +57,11 @@ public class IndexController {
 		session.invalidate();
 		return "redirect:/";
 	}
-
+	
+	@RequestMapping("/list")
+	public String showEmpList(Model model) {
+		model.addAttribute("empList", employeeRepository.findAll());
+		return "/list";
+	}
+	
 }
