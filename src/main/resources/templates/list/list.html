@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_4block :: layout(~{::body/content()})}">
+
+<head>
+	<title>社員一覧 | 社員管理システム</title>
+	<meta charset="UTF-8" />
+</head>
+
+<body class="admin user_list">
+	<h3>社員一覧画面</h3>
+	<!-- セッション中にユーザ情報が存在する場合のみ以下の処理を実行する。 -->
+	<!-- なお、セッション中のユーザ情報がない（null）の場合、-->
+	<!-- フィルターの処理により、当該Thymeleaf処理完了後にログイン画面にリダイレクトする。 -->
+	<div class="regist_link">
+		<a th:href="@{/regist/input}">新規社員登録</a>
+	</div>
+
+	<!-- ***検索結果が０件の場合*** -->
+	<!-- ***falseを書き換え、表示内容を記述すること*** -->
+	<th:block th:if="false">
+		<div class="message">
+			<!--以下に該当する社員が存在しないときのメッセージを記述する -->
+			<p class="back_to_top_message"></p>
+			<!--以下に一覧表示に戻るリンクを記述する -->
+			<p class="back_to_top_link"></p>
+		</div>
+	</th:block>
+	<!-- ***検索結果が０件の場合 ここまで*** -->
+
+	<!-- ***検索結果がある場合*** -->
+	<!-- Employeeテーブルからclass名を指定すること。 -->
+	<!-- ***trueを書き換えること*** -->
+	<table class="list_table" th:if="true">
+		<tr>
+			<th class="empId">社員ID</th>
+			<th class="empName">社員名</th>
+			<th class="gender">性別</th>
+			<th class="address">住所</th>
+			<th class="birthday">生年月日</th>
+			<th class="authority">権限</th>
+			<th class="deptName">部署名</th>
+		</tr>
+
+		<!-- ***####を書き換え、社員情報を全件出力する*** -->
+		<tr th:each="####:####">
+
+
+
+
+
+
+
+
+
+
+		</tr>
+		<!-- ***####を書き換え、社員情報を全件出力する ここまで*** -->
+	</table>
+	<!-- ***検索結果がある場合 ここまで*** -->
+
+</body>
+
+</html>
