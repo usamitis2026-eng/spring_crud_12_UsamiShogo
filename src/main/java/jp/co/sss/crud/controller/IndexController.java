@@ -1,6 +1,8 @@
 package jp.co.sss.crud.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,15 +21,36 @@ public class IndexController {
 
 	@Autowired
 	EmployeeRepository employeeRepository;
-
+	
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String showList(Model model) {
+        model.addAttribute("employees", employeeRepository.findAll());
+        return "list/list"; 
+    }
 	@Autowired
 	HttpSession session;
+	
+	@RequestMapping(value = "/list/search", method = {RequestMethod.GET, RequestMethod.POST})
+	public String showListSearch(String empName, Model model) {
+		List<Employee> empList;
+		if (empName != null && !empName.isEmpty()) {
+			empList = employeeRepository.findByEmpName("%" + empName + "%");
+			model.addAttribute("searchedName", empName);
+		} else {
+			empList = employeeRepository.findAll();
+		}
+		
+		model.addAttribute("empList", empList);
+		return "list/list"; 
+	}
+
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String index(@ModelAttribute LoginForm loginForm) {
 		session.invalidate();
 		return "index";
 	}
+	
 
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
 	public String login(@ModelAttribute LoginForm loginForm, HttpSession session, Model model) {
@@ -57,11 +80,4 @@ public class IndexController {
 		session.invalidate();
 		return "redirect:/";
 	}
-	
-	@RequestMapping("/list")
-	public String showEmpList(Model model) {
-		model.addAttribute("empList", employeeRepository.findAll());
-		return "/list";
-	}
-	
 }

@@ -9,6 +9,7 @@
 <body class="admin user_list">
 	<h3>社員一覧画面</h3>
 	<!-- セッション中にユーザ情報が存在する場合のみ以下の処理を実行する。 -->
+	
 	<!-- なお、セッション中のユーザ情報がない（null）の場合、-->
 	<!-- フィルターの処理により、当該Thymeleaf処理完了後にログイン画面にリダイレクトする。 -->
 	<div class="regist_link">
@@ -16,18 +17,22 @@
 	</div>
 
 	<!-- ***検索結果が０件の場合*** -->
+	
+	
 	<!-- ***falseを書き換え、表示内容を記述すること*** -->
 	<th:block th:if="false">
 		<div class="message">
 			<!--以下に該当する社員が存在しないときのメッセージを記述する -->
-			<p class="back_to_top_message"></p>
+			<p class="back_to_top_message">該当する社員は存在しません。</p>
 			<!--以下に一覧表示に戻るリンクを記述する -->
-			<p class="back_to_top_link"></p>
+			<p class="back_to_top_link">一覧表示に戻る</p>
 		</div>
 	</th:block>
 	<!-- ***検索結果が０件の場合 ここまで*** -->
 
 	<!-- ***検索結果がある場合*** -->
+	
+	
 	<!-- Employeeテーブルからclass名を指定すること。 -->
 	<!-- ***trueを書き換えること*** -->
 	<table class="list_table" th:if="true">
@@ -42,15 +47,14 @@
 		</tr>
 
 		<!-- ***####を書き換え、社員情報を全件出力する*** -->
-		<tr th:each="list:${empList}">
+		<tr th:each="list:${employees}">
 			<td th:text="${list.empId}"></td>
 			<td th:text="${list.empName}"></td>
-			<td th:text="${list.gender}"></td>
+			<td th:text="${list.gender == 1 ? '男性' : '女性'}"></td>
 			<td th:text="${list.address}"></td>
-			<td th:text="${list.birthday}"></td>
-			<td th:text="${list.authority}"></td>
-			<td th:text="${list.emp.deptName}"></td>
-
+			<td th:text="${#dates.format(list.birthday, 'yyyy/MM/dd')}"></td>
+			<td th:text="${list.authority == 1 ? '一般' : '管理者'}"></td>
+			<td th:text="${list.department.deptName}"></td>
 		</tr>
 		<!-- ***####を書き換え、社員情報を全件出力する ここまで*** -->
 	</table>

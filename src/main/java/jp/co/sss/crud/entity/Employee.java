@@ -4,15 +4,22 @@ import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "employee")
 public class Employee {
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_emp_gen")
+	@SequenceGenerator(name = "seq_emp_gen", sequenceName = "seq_emp", allocationSize = 1)
+	@Column(name = "empId")
 	private Integer empId;
-
 	@Column
 	private String empPass;
 
@@ -30,61 +37,73 @@ public class Employee {
 
 	@Column
 	private Integer authority;
-	
-	 public Integer getEmpId() {
-	        return empId;
-	    }
 
-	    public void setEmpId(Integer empId) {
-	        this.empId = empId;
-	    }
+	@ManyToOne
+	@JoinColumn(name = "dept_id", referencedColumnName = "deptId", nullable = false)
+	private Department department;
 
-	    public String getEmpPass() {
-	        return empPass;
-	    }
+	public Integer getEmpId() {
+		return empId;
+	}
 
-	    public void setEmpPass(String empPass) {
-	        this.empPass = empPass;
-	    }
+	public void setEmpId(Integer empId) {
+		this.empId = empId;
+	}
 
-	    public String getEmpName() {
-	        return empName;
-	    }
+	public String getEmpPass() {
+		return empPass;
+	}
 
-	    public void setEmpName(String empName) {
-	        this.empName = empName;
-	    }
+	public Department getDepartment() {
+		return department;
+	}
 
-	    public Integer getGender() {
-	        return gender;
-	    }
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
 
-	    public void setGender(Integer gender) {
-	        this.gender = gender;
-	    }
+	public void setEmpPass(String empPass) {
+		this.empPass = empPass;
+	}
 
-	    public String getAddress() {
-	        return address;
-	    }
+	public String getEmpName() {
+		return empName;
+	}
 
-	    public void setAddress(String address) {
-	        this.address = address;
-	    }
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
 
-	    public Date getBirthday() {
-	        return birthday;
-	    }
+	public Integer getGender() {
+		return gender;
+	}
 
-	    public void setBirthday(Date birthday) {
-	        this.birthday = birthday;
-	    }
+	public void setGender(Integer gender) {
+		this.gender = gender;
+	}
 
-	    public Integer getAuthority() {
-	        return authority;
-	    }
+	public String getAddress() {
+		return address;
+	}
 
-	    public void setAuthority(Integer authority) {
-	        this.authority = authority;
-	    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public Integer getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(Integer authority) {
+		this.authority = authority;
+	}
 
 }
