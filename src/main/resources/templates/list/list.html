@@ -15,10 +15,10 @@
 	<div class="regist_link">
 		<a th:href="@{/regist/input}">新規社員登録</a>
 	</div>
-
+	<form th:action="@{/employee/search}" method="post">
+		
+	</form>
 	<!-- ***検索結果が０件の場合*** -->
-	
-	
 	<!-- ***falseを書き換え、表示内容を記述すること*** -->
 	<th:block th:if="false">
 		<div class="message">
