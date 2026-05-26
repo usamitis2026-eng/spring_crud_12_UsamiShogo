@@ -10,6 +10,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     
     Employee findByEmpIdAndEmpPass(int empId, String empPass);
     
-    List<Employee> findByEmpContaining(String empName);
-
+    List<Employee> findByEmpNameContaining(String empName);
+    List<Employee> findAllByOrderByEmpIdAsc();
 }

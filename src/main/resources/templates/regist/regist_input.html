@@ -8,9 +8,8 @@
 
 <body class="admin user_regist_input_admin">
 	<h3>社員登録入力画面</h3>
-	 <!-- class名とボタンの変更は行なわないこと。-->
-	<div class="update">
-		<form th:action="####" method="post" th:object="####">
+	 <div class="update">
+		<form th:action="@{/regist/check}" method="post" th:object="${employeeForm}">
 				
 			<p>
 				<span th:each="error:${#fields.detailedErrors()}">
@@ -21,45 +20,46 @@
 			<div class="form">
 				<div class="label">パスワード：</div>
 				<div class="input">
-					<input type="password" th:field="####" />
+					<input type="password" th:field="*{empPass}" />
 				</div>
 			</div>
 			<div class="form">
 				<div class="label">社員名：</div>
 				<div class="input">
-					<input type="text" th:field="####" />
+					<input type="text" th:field="*{empName}" />
 				</div>
 			</div>
 			<div class="form">
 				<div class="label">性別：</div>
 				<div class="input">
-					<input type="radio" th:field="####" value="1" />男性&nbsp;
-					<input type="radio" th:field="####" value="2" />女性
+					<input type="radio" th:field="*{gender}" value="1" />男性&nbsp;
+					<input type="radio" th:field="*{gender}" value="2" />女性
 				</div>
 			</div>
 			<div class="form">
 				<div class="label">住所：</div>
 				<div class="input">
-					<input type="text" th:field="####" />
+					<input type="text" th:field="*{address}" />
 				</div>
 			</div>
 			<div class="form">
 				<div class="label">生年月日：</div>
 				<div class="input">
-					<input type="text" th:field="####" /> (YYYY/MM/DD)
+					
+					<input type="text" th:field="*{birthday}" /> (YYYY/MM/DD)
 				</div>
 			</div>
 			<div class="form">
 				<div class="label">権限：</div>
 				<div class="input">
-					<input type="radio" th:field="####" value="1" />一般&nbsp;&nbsp;
-					<input type="radio" th:field="####" value="2" />管理者
+					<input type="radio" th:field="*{authority}" value="1" />一般&nbsp;&nbsp;
+					<input type="radio" th:field="*{authority}" value="2" />管理者
 				</div>
 			</div>
 			<div class="form">
 				<div class="label">部署名：</div>
 				<div class="input">
-					<select th:field="####">
+					<select th:field="*{deptId}">
 						<option value="1">営業部</option>
 						<option value="2">経理部</option>
 						<option value="3">総務部</option>
