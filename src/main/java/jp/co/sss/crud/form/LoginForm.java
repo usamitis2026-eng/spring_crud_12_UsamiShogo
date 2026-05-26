@@ -1,15 +1,15 @@
 package jp.co.sss.crud.form;
 
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class LoginForm {
-	
-	/** 社員ID */
+	@NotNull(message = "社員IDを入力してください。")
 	private Integer empId;
 
-	/** パスワード */
+	// 未入力(空文字)チェックと文字数制限の例
+	
+	@NotBlank(message = "パスワードを入力してください。")
 	private String empPass;
 
 	/**
